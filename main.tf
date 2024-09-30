@@ -34,10 +34,10 @@ module "blog_vpc" {
 }
 
 resource "aws_autoscaling_traffic_source_attachment" "blog_as_traffic_source" {
-  autoscaling_group_name = aws_autoscaling_group.blog_as_traffic_source.id
+  autoscaling_group_name = module.autoscaling.id
 
   traffic_source {
-    identifier = blog_alb.arn
+    identifier = module.blog_alb.target_group_arns
     type       = "elbv2"
   }
 }
