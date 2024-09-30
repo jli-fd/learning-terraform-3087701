@@ -56,7 +56,7 @@ module "autoscaling"  {
   image_id           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
 
-  traffic_source_attachments = [blog_as_traffic_source]
+  traffic_source_attachments = [resource.blog_as_traffic_source]
 }
 
 module "blog_alb" {
