@@ -37,7 +37,7 @@ resource "aws_autoscaling_traffic_source_attachment" "blog_as_traffic_source" {
   autoscaling_group_name = module.autoscaling.autoscaling_group_name
 
   traffic_source {
-    identifier = module.blog_alb.target_group[0].arn
+    identifier = module.blog_alb.target_groups[0].arn
     type       = "elbv2"
   }
 }
