@@ -75,7 +75,7 @@ module "blog_alb" {
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
-      target_id        = autoscaling_group_id
+      target_id        = module.autoscaling.autoscaling_group_id
     }
   }
 
