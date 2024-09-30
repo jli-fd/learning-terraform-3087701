@@ -33,15 +33,6 @@ module "blog_vpc" {
   }
 }
 
-resource "aws_autoscaling_traffic_source_attachment" "blog_as_traffic_source" {
-  autoscaling_group_name = module.autoscaling.autoscaling_group_name
-
-  traffic_source {
-    identifier = module.blog_alb.target_groups[0].arn
-    type       = "elbv2"
-  }
-}
-
 module "autoscaling"  {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "8.0.0"
@@ -75,6 +66,16 @@ module "blog_alb" {
       forward = {
         target_group_key = "ex-instance"
       }
+    }
+  }
+
+  target_groups = {
+    ex-instance = {
+      name_prefix      = "blog-"
+      protocol         = "HTTP"
+      port             = 80
+      target_type      = "instance"
+      target_id        = autoscaling_group_id
     }
   }
 
