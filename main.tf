@@ -34,7 +34,7 @@ module "blog_vpc" {
 }
 
 resource "aws_autoscaling_traffic_source_attachment" "blog_as_traffic_source" {
-  autoscaling_group_name = aws_autoscaling_group.example.id
+  autoscaling_group_name = aws_autoscaling_group.blog_as_traffic_source.id
 
   traffic_source {
     identifier = blog_alb.arn
@@ -42,7 +42,7 @@ resource "aws_autoscaling_traffic_source_attachment" "blog_as_traffic_source" {
   }
 }
 
-module "autoscaling" "blog_autoscaling" {
+module "autoscaling"  {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "8.0.0"
   # insert the 1 required variable here
